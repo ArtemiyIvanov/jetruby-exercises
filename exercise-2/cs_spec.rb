@@ -1,7 +1,7 @@
 require 'rspec'
-require './ex_2.rb'
+require './cs.rb'
 
-RSpec.describe "ex_2 methods" do
+RSpec.describe "last_2_char method" do
     it "#return reverse word" do
         expect(last_2_char("hello")).to eq("olleh")
     end
