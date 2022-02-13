@@ -8,7 +8,8 @@ end
 def where(word)
     File.foreach(FILE_PATH).with_index do |line, index|
         if line.include?(word)
-            @line_id = index
+            @line_id = index 
+            break
         end
     end
     @line_id
@@ -41,10 +42,11 @@ end
 def find(id)
     File.foreach(FILE_PATH).with_index do |line, index|
         if index == id
-            @line = line
+            @line = line 
+            break
         end
     end
-    @line
+    puts @line
 end
 
-puts find(2)
+puts find(1)
