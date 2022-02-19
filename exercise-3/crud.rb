@@ -48,5 +48,3 @@ def find(id)
     end
     puts @line
 end
-
-puts find(1)
