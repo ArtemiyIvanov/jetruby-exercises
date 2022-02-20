@@ -6,11 +6,6 @@ end
 BALANCE_FILE_PATH = "balance.txt"
 START_BALANCE = 100.0
 
-if !File.exist?(BALANCE_FILE_PATH)
-    File.open(BALANCE_FILE_PATH, "w") {|f| f.write(START_BALANCE)}
-end
-balance = File.read(BALANCE_FILE_PATH).to_f
-
 MESSAGE_FOR_DEPOSIT = 
 <<-STRING
 \nYou should enter a number greater then zero to make a deposit.
@@ -53,6 +48,11 @@ MESSAGE_BALANCE_LESS_THAN_NUMBER =
 in the account.
 Please try again.\n
 STRING
+def balance_method
+    if !File.exist?(BALANCE_FILE_PATH)
+        File.open(BALANCE_FILE_PATH, "w") {|f| f.write(START_BALANCE)}
+    end
+    balance = File.read(BALANCE_FILE_PATH).to_f
 begin 
 
     puts START_MESSAGE
@@ -104,10 +104,12 @@ begin
     
         end while command != 'q'
     when 'b'
-        puts MESSAGE_CURRENT_BALANCEgit + balance.to_s
+        puts MESSAGE_CURRENT_BALANCE + balance.to_s
     else 
         puts "\nYou entered incorrect command.\nPlease try again."
         next
     end
 end while command != 'q'
 File.write(BALANCE_FILE_PATH, balance)
+end
+balance_method
