@@ -19,4 +19,7 @@ RSpec.describe "ex_1 methods" do
     it "#test foobar. If there is no number = 20" do
         expect(foobar(15, 2)).to eq(17)
     end
+    it "#test foobar. If first and second numbers = 20" do
+        expect(foobar(20, 20)).to eq(20)
+    end
 end
