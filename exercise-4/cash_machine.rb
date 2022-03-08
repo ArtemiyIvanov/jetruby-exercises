@@ -28,26 +28,26 @@ class CashMachine
 
     MESSAGE_NOT_A_NUMBER = 
     <<-STRING
-    \nYou entered not a number.
-    Please try again.\n
+\nYou entered not a number.\nPlease try again.
     STRING
 
     MESSAGE_NUMBER_LESS_THAN_0 = 
     <<-STRING
-    \nYou entered a number not
-    greater then zero.
-    Please try again.\n
+\nYou entered a number not greater then zero.\nPlease try again.
     STRING
 
     MESSAGE_CURRENT_BALANCE = "\nYour current balance:\n"
 
     MESSAGE_BALANCE_LESS_THAN_NUMBER = 
     <<-STRING
-    \nInsufficient funds in the account.
-    Please try again.\n
+\nInsufficient funds in the account.\nPlease try again.
     STRING
 
-    def initialize(balance)
+    def initialize()
+        if !File.exist?(BALANCE_FILE_PATH)
+            File.open(BALANCE_FILE_PATH, "w") {|f| f.write(START_BALANCE)}
+        end
+        balance = File.read(BALANCE_FILE_PATH).to_f
         @balance = balance
     end
 
@@ -81,12 +81,8 @@ class CashMachine
     end
 
     def init()
-        if !File.exist?(BALANCE_FILE_PATH)
-            File.open(BALANCE_FILE_PATH, "w") {|f| f.write(START_BALANCE)}
-        end
-        balance = File.read(BALANCE_FILE_PATH).to_f
 
-        cash_machine = CashMachine.new(balance)
+        cash_machine = CashMachine.new()
 
         loop do
             puts START_MESSAGE
@@ -96,13 +92,13 @@ class CashMachine
             when 'd'
                 puts MESSAGE_FOR_DEPOSIT
                 value = gets.downcase.chomp
-                break if value == 'q'
+                next if value == 'q'
                 print cash_machine.deposit(value)
                 next
             when 'w'
                 puts MESSAGE_FOR_WITHDROW
                 value = gets.downcase.chomp
-                break if value == 'q'
+                next if value == 'q'
                 print cash_machine.withdrow(value)
                 next
             when 'b'
@@ -113,10 +109,10 @@ class CashMachine
                 next
             end
         end
-        File.write(BALANCE_FILE_PATH, balance)
+        File.write(BALANCE_FILE_PATH, cash_machine.balance)
     end
     
 end
 
     
-CashMachine.new(100).init()
+#CashMachine.new().init()
