@@ -79,8 +79,7 @@ class CashMachine
         @balance -= value.to_f
         return MESSAGE_CURRENT_BALANCE + @balance.to_s
     end
-
-    def init()
+    def self.init()
 
         cash_machine = CashMachine.new()
 
@@ -113,6 +112,5 @@ class CashMachine
     end
     
 end
-
     
-#CashMachine.new().init()
+CashMachine.init()
