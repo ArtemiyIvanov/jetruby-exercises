@@ -18,7 +18,7 @@ def ask_about_pokemons
         puts "Incorrect number of pokemons :("
         return []
     end
-    return pokemons
+    puts pokemons
 end
 
 ask_about_pokemons
