@@ -37,15 +37,22 @@ STUDENTS
     result = []
     begin
 
-        puts "Enter an age of student"
+        puts "Enter an age of student\n input -1 to stop\n"
         age = gets
         age = age.to_i
         break if age == -1
         id = where(age.to_s, students)
+        if id.empty? 
+            puts "There're no students with that age :(\n Try again\n"
+        else 
+            puts "Added successfuly\n" 
+        end
         for i in id
             result.include?(students[i]) ? next : result.push(students[i])
         end
     end while students.length != result.length
+
+    puts "file contains all students" if students.length != result.length
 
     result_file = File.open(RESULT_FILE_PATH, 'w')
 
@@ -56,3 +63,4 @@ STUDENTS
 
     return File.read(RESULT_FILE_PATH)
 end
+puts main
